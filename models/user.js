@@ -8,7 +8,7 @@ const UserSchema = new Schema({
   },
   username: {
     type: String,
-    unique: [true, "Username already exists"],
+    unique: true,
     required: [true, "Username is required"],
     //it should contain 8-20 alphanumeric letter and be unique, accented letters are allowed
     match: [
@@ -16,7 +16,7 @@ const UserSchema = new Schema({
       "Username must be 8-20 alphanumeric characters",
     ],
   },
-  imagei: {
+  image: {
     type: String,
   },
 });
