@@ -16,10 +16,7 @@ const Nav = () => {
       const response = await getProviders();
 
       setProviders(response);
-
-      console.log(response);
     };
-    console.log(providers);
     setUpProviders();
   }, []);
 
@@ -73,8 +70,6 @@ const Nav = () => {
           </>
         )}
       </div>
-
-      {console.log(providers)}
 
       {/*Mobile navigation */}
       <div className="sm:hidden flex relative">

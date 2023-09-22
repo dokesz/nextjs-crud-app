@@ -8,7 +8,7 @@ const UserSchema = new Schema({
   },
   username: {
     type: String,
-    unique: true,
+    unique: false,
     required: [true, "Username is required"],
     //it should contain 8-20 alphanumeric letter and be unique, accented letters are allowed
     match: [

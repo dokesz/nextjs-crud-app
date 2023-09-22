@@ -13,6 +13,9 @@ const CreatePrompt = () => {
     const router = useRouter();
     const { data: session } = useSession();
 
+    // If the user is not logged in, display Not Signed In
+    if(!session) router.push('/');
+
     const createPrompt = async (e) => {
         e.preventDefault();
         setSubmitting(true);

@@ -10,7 +10,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
       {data.map((post) => {
         return (
           <PromptCard
-            key={prompt.id}
+            key={post._id}
             post={post}
             handleTagClick={handleTagClick}
           />
@@ -32,6 +32,7 @@ const Feed = () => {
       const response = await fetch("/api/prompt");
       const data = await response.json();
       setPosts(data);
+      console.log(data);
     };
     fetchPosts();
   }, []);
