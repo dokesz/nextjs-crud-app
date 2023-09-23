@@ -19,8 +19,6 @@ const PropmtCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
     }, 3000);
   };
 
-  console.log(post);
-
   const handleProfileClick = () => {
 
     if (post.creator._id === session?.user.id) return router.push("/profile");
