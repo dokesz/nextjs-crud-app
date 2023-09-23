@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
+import { useSession } from "next-auth/react";
 import PromptCard from "./PromptCard.jsx";
 
 const PromptCardList = ({ data, handleTagClick }) => {
@@ -23,8 +23,19 @@ const PromptCardList = ({ data, handleTagClick }) => {
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [posts, setPosts] = useState([]);
+  const [filteredPosts, setFilteredPosts] = useState([]);
+  const { data: session } = useSession();
 
-  const handleSearchChange = (e) => {};
+  const handleSearchChange = (e) => {
+    setSearchText(e.target.value);
+  };
+
+  //handleTagClick is a function that will be passed to PromptCardList
+  //and then to PromptCard as a prop so that when the user clicks on a tag
+  //it will filter the posts by that tag
+  const handleTagClick = (tag) => {
+    setSearchText(tag);
+  }
 
   useEffect(() => {
     // fetch data from server
@@ -36,6 +47,20 @@ const Feed = () => {
     };
     fetchPosts();
   }, []);
+
+  useEffect(() => {
+    //this line needed because without it wont work the name search
+    const trimmedUserName = session?.user.name.toLocaleLowerCase();
+
+    const filterPosts = posts.filter((post) => {
+      return (
+        post.prompt.includes(searchText) ||
+        post.tag.includes(searchText) ||
+        trimmedUserName.includes(searchText)
+      );
+    });
+    setFilteredPosts(filterPosts);
+  }, [searchText, session]);
 
   return (
     <section className="feed">
@@ -50,7 +75,10 @@ const Feed = () => {
         />
       </form>
 
-      <PromptCardList data={posts} handleTagClick={() => {}} />
+      <PromptCardList
+        data={!searchText ? posts : filteredPosts}
+        handleTagClick={handleTagClick}
+      />
     </section>
   );
 };
