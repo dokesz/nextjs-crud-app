@@ -1,6 +1,26 @@
+"use client"
+
 import Link from "next/link";
+import { useState } from "react";
+import "@uploadthing/react/styles.css";
+
+import { UploadButton } from "@/utils/uploadthing";
 
 const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
+  const [uploadComplete, setUploadComplete] = useState(false);
+
+  const handleUploadComplete = (res) => {
+    // Do something with the response
+    setPost({ ...post, image: res[0].url });
+    console.log(res[0].url);
+    setUploadComplete(true); // Set upload status to complete
+  };
+
+  const handleUploadError = (error) => {
+    // Do something with the error.
+    alert(`ERROR! ${error.message}`);
+  };
+  
   return (
     <section className="w-full max-w-full flex-start flex-col">
       <h1 className="head_text text-left">
@@ -42,6 +62,14 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             className="form_input"
           ></input>
         </label>
+        <label>
+        <span className="font-satoshi font-semibold text-base text-gray-700">Image Upload</span>
+        <UploadButton
+          endpoint="imageUploader"
+          onClientUploadComplete={handleUploadComplete}
+          onUploadError={handleUploadError}
+        />
+      </label>
 
         <div className="flex-end mx-3 mb-5 gap-4">
           <Link href="/" className="text-gray-500 text-sm">
@@ -50,7 +78,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
 
           <button
             type="submit"
-            disabled={submitting}
+            disabled={submitting || !uploadComplete}
             className="px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white"
           >
             {submitting ? `${type}...` : type}

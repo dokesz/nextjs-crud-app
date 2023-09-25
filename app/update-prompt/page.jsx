@@ -13,14 +13,16 @@ const EditPrompt = () => {
   const promptId = searchParams.get("id");
 
   const [submitting, setSubmitting] = useState(false);
-  const [post, setPost] = useState({ prompt: "", tag: "" });
+  const [post, setPost] = useState({ prompt: "", tag: "", image: "" });
 
   useEffect(() => {
     const getPromptDetails = async () => {
       const response = await fetch(`/api/prompt/${promptId}`);
       const data = await response.json();
 
-      setPost({ prompt: data.prompt, tag: data.tag });
+
+      console.log("Fetched data.image:", data.image);
+      setPost({ prompt: data.prompt, tag: data.tag, image: data.image });
     };
     if (promptId) getPromptDetails();
   }, [promptId]);
@@ -40,6 +42,7 @@ const EditPrompt = () => {
         body: JSON.stringify({
           prompt: post.prompt,
           tag: post.tag,
+          image: post.image
         }),
       });
 

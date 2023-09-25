@@ -8,7 +8,7 @@ import Form from '@/components/Form'
 
 const CreatePrompt = () => {
     const [submitting, setSubmitting] = useState(false);
-    const [post, setPost] = useState({prompt: '', tag: ''});
+    const [post, setPost] = useState({prompt: '', tag: '', image: ''});
 
     const router = useRouter();
     const { data: session } = useSession();
@@ -32,7 +32,8 @@ const CreatePrompt = () => {
                 body:   JSON.stringify({
                     prompt: post.prompt,
                     userId: session?.user.id,
-                    tag: post.tag
+                    tag: post.tag,
+                    image: post.image
                 })
             })
 
