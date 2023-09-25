@@ -13,8 +13,14 @@ const CreatePrompt = () => {
     const router = useRouter();
     const { data: session } = useSession();
 
-    // // If the user is not logged in, display Not Signed In
-    // if(!session) router.push('/');
+    if(!session) {
+        return(
+            <div className="flex flex-col items-center justify-center py-2">
+                <h1 className="text-2xl font-bold">You are not signed in.</h1>
+                <button onClick={() => signIn()} className="outline_btn">Sign In</button>
+            </div>
+        )
+    }
 
     const createPrompt = async (e) => {
         e.preventDefault();
