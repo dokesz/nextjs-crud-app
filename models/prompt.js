@@ -12,6 +12,10 @@ const PromptSchema = new Schema({
     tag:{
         type: String,
         required: [true, 'Please provide a tag.'],
+    },
+    image: {
+        type: String,
+        required: [true, 'Please provide an image.'],
     }
 });
 

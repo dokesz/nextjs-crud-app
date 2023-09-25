@@ -23,7 +23,7 @@ export const GET = async (request, { params }) => {
 
 // PATCH (update)
 export const PATCH = async (request, { params }) => {
-  const { prompt, tag } = await request.json();
+  const { prompt, tag, image } = await request.json();
 
   try {
     await connectToDatabase();
@@ -36,6 +36,7 @@ export const PATCH = async (request, { params }) => {
 
     existingPrompt.prompt = prompt;
     existingPrompt.tag = tag;
+    existingPrompt.image = image;
 
     await existingPrompt.save();
     return new Response(JSON.stringify(existingPrompt), { status: 200 });
