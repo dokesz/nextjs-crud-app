@@ -49,14 +49,11 @@ const Feed = () => {
   }, []);
 
   useEffect(() => {
-    //this line needed because without it wont work the name search
-    const trimmedUserName = session?.user.name.toLocaleLowerCase();
-
     const filterPosts = posts.filter((post) => {
       return (
         post.prompt.includes(searchText) ||
         post.tag.includes(searchText) ||
-        trimmedUserName.includes(searchText)
+        post.creator.username.includes(searchText)
       );
     });
     setFilteredPosts(filterPosts);
