@@ -24,7 +24,7 @@ const MyProfile = () => {
     if (session?.user.id) fetchPosts();
   }, [session?.user.id]);
 
-  if (!session) return <div>You're not signed in</div>;
+  if (!session) return <div>You&apos;re not signed in</div>;
 
   const handleEdit = (post) => {
     console.log(post);

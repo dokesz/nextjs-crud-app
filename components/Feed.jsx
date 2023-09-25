@@ -60,7 +60,7 @@ const Feed = () => {
       );
     });
     setFilteredPosts(filterPosts);
-  }, [searchText, session]);
+  }, [searchText, session, posts]);
 
   return (
     <section className="feed">
