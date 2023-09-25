@@ -27,7 +27,6 @@ const MyProfile = () => {
   if (!session) return <div>You&apos;re not signed in</div>;
 
   const handleEdit = (post) => {
-    console.log(post);
     router.push(`/update-prompt?id=${post._id}`);
   };
 
