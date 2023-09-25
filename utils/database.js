@@ -1,4 +1,3 @@
-require('dotenv').config();
 import mongoose from "mongoose";
 
 let isConnected = false; //track if db is connected

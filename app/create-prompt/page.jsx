@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { useState } from "react";
 import { useSession, signIn } from "next-auth/react";
@@ -13,8 +13,8 @@ const CreatePrompt = () => {
     const router = useRouter();
     const { data: session } = useSession();
 
-    // If the user is not logged in, display Not Signed In
-    if(!session) router.push('/');
+    // // If the user is not logged in, display Not Signed In
+    // if(!session) router.push('/');
 
     const createPrompt = async (e) => {
         e.preventDefault();
