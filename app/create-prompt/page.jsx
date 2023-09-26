@@ -13,13 +13,8 @@ const CreatePrompt = () => {
     const router = useRouter();
     const { data: session } = useSession();
 
-    if(!session) {
-        return(
-            <div className="flex flex-col items-center justify-center py-2">
-                <h1 className="text-2xl font-bold">You are not signed in.</h1>
-                <button onClick={() => signIn()} className="outline_btn">Sign In</button>
-            </div>
-        )
+    if(!session?.user) {
+        router.push('/');
     }
 
     const createPrompt = async (e) => {
