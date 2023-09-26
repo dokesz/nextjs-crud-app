@@ -9,12 +9,11 @@ import Prompt from "@models/prompt";
 export const GET = async () => {
     try {
         await connectToDatabase();
-
         const prompts = await Prompt.find({}).populate('creator');
-
-        return new Response(JSON.stringify(prompts), {status: 200})
+        return new Response(JSON.stringify(prompts), { status: 200 });
     } catch (error) {
-        return new Response("Failed to fetch all prompts", {status: 500})
+        console.error("Failed to fetch all prompts:", error);
+        return new Response(JSON.stringify({ error: "Failed to fetch all prompts" }), { status: 500 });
     }
 }
 

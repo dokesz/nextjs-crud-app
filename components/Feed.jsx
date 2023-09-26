@@ -25,7 +25,7 @@ const Feed = () => {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const { data: session } = useSession();
-  const [isLoading, setIsLoading] = useState("true");
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleSearchChange = (e) => {
     setSearchText(e.target.value);
@@ -40,21 +40,21 @@ const Feed = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      if (isLoading) { // Check if isLoading is true
-        try {
-          const response = await fetch("/api/prompt");
-          const data = await response.json();
-          setPosts(data);
-          setIsLoading(false); // Set isLoading to false after data is fetched
-        } catch (error) {
-          console.error("Failed to fetch posts:", error);
-          setIsLoading(false); // Set isLoading to false even if there is an error
+        if (isLoading) {
+            try {
+                const response = await fetch("/api/prompt");
+                const data = await response.json();
+                setPosts(data);
+                setIsLoading(false);
+            } catch (error) {
+                console.error("Failed to fetch posts:", error);
+                setIsLoading(false);
+            }
         }
-      }
     };
-  
+
     fetchPosts();
-  }, [isLoading]);
+}, [isLoading]);
 
   useEffect(() => {
     const filterPosts = posts.filter((post) => {
