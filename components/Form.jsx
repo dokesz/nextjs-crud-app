@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import { useState } from "react";
-import "@uploadthing/react/styles.css";
+// import "@uploadthing/react/styles.css";
 
 import { UploadButton } from "@/utils/uploadthing";
 
@@ -20,7 +20,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
     // Do something with the error.
     alert(`ERROR! ${error.message}`);
   };
-  
+
   return (
     <section className="w-full max-w-full flex-start flex-col">
       <h1 className="head_text text-left">
@@ -63,23 +63,33 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
           ></input>
         </label>
         <label>
-        <span className="font-satoshi font-semibold text-base text-gray-700">Image Upload</span>
-        <UploadButton
-          endpoint="imageUploader"
-          onClientUploadComplete={handleUploadComplete}
-          onUploadError={handleUploadError}
-        />
-      </label>
+          <span className="font-satoshi font-semibold text-base text-gray-700">
+            Image Upload
+          </span>
+          <UploadButton
+            appearance={{
+              button:
+                "px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white",
+              container:
+                "w-max flex-row rounded-md p-1 border-cyan-300 bg-slate-800",
+              allowedContent:
+                "flex h-8 flex-col items-center justify-center px-2 text-white",
+            }}
+            endpoint="imageUploader"
+            onClientUploadComplete={handleUploadComplete}
+            onUploadError={handleUploadError}
+          />
+        </label>
 
         <div className="flex-end mx-3 mb-5 gap-4">
-          <Link href="/" className="text-gray-500 text-sm">
+          <Link href="/" className="text-gray-500 text-md">
             Cancel
           </Link>
 
           <button
             type="submit"
             disabled={submitting || !uploadComplete}
-            className="px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white"
+            className="px-5 py-1.5 text-md bg-primary-orange rounded-full text-white"
           >
             {submitting ? `${type}...` : type}
           </button>
