@@ -25,6 +25,7 @@ const Feed = () => {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const { data: session } = useSession();
+  const [isLoading, setIsLoading] = useState("false");
 
   const handleSearchChange = (e) => {
     setSearchText(e.target.value);
@@ -40,9 +41,12 @@ const Feed = () => {
   useEffect(() => {
     // fetch data from server
     const fetchPosts = async () => {
-      const response = await fetch("/api/prompt");
-      const data = await response.json();
-      setPosts(data);
+      if(isLoading === "false"){
+        const response = await fetch("/api/prompt");
+        const data = await response.json();
+        setPosts(data);
+        setIsLoading(true);
+      }else setIsLoading(false);
     };
     fetchPosts();
   }, []);
@@ -70,11 +74,14 @@ const Feed = () => {
           className="search_input peer"
         />
       </form>
-
-      <PromptCardList
-        data={!searchText ? posts : filteredPosts}
-        handleTagClick={handleTagClick}
-      />
+      {
+        !isLoading && ( 
+          <PromptCardList
+            data={!searchText ? posts : filteredPosts}
+            handleTagClick={handleTagClick}
+          />
+        )
+      }
     </section>
   );
 };
