@@ -39,9 +39,9 @@ const PropmtCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
           />
 
           <div className="flex flex-col" onClick={handleProfileClick}>
-            <h3 className="font-satosi font-semibold text-gray-900">
+            <h2 className="font-satosi font-semibold text-gray-900">
               {post.creator.username}
-            </h3>
+            </h2>
           </div>
         </div>
         <div className="copy_btn" onClick={handleCopy}>
