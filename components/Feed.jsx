@@ -75,7 +75,7 @@ const Feed = () => {
         />
       </form>
       {
-        !isLoading && ( 
+        isLoading ? (<div>Loading</div>) : ( 
           <PromptCardList
             data={!searchText ? posts : filteredPosts}
             handleTagClick={handleTagClick}
