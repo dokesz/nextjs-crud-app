@@ -11,12 +11,13 @@ const Nav = () => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
   const providers = useMemo(() => {
-    const cachedProviders = JSON.parse(localStorage.getItem("provider"));
-    if (cachedProviders) {
-      return cachedProviders;
-    } else {
-      return null;
+    if (typeof window !== 'undefined') {
+      const cachedProviders = JSON.parse(localStorage.getItem('provider'));
+      if (cachedProviders) {
+        return cachedProviders;
+      }
     }
+    return null;
   }, []);
 
   useEffect(() => {
