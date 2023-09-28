@@ -40,7 +40,7 @@ const PropmtCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 
           <div className="flex flex-col" onClick={handleProfileClick}>
             <h2 className="font-satosi font-semibold text-gray-900">
-              {post.creator.username}
+              {post?.creator?.username}
             </h2>
           </div>
         </div>
@@ -63,7 +63,7 @@ const PropmtCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
       <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
       <p
         className="font-inter text-sm blue_gradient cursor-pointer"
-        onClick={() => handleTagClick && handleTagClick(post.tag)}
+        onClick={() => handleTagClick?.(post.tag)}
       >
         #{post.tag}
       </p>
