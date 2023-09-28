@@ -69,7 +69,7 @@ const Nav = () => {
               <button
                 type="button"
                 onClick={() => {
-                  signIn("google");
+                  signIn(providers?.google);
                 }}
                 className="black_btn"
               >
@@ -128,7 +128,7 @@ const Nav = () => {
               <button
                 type="button"
                 onClick={() => {
-                  signIn("google");
+                  signIn(providers?.google);
                 }}
                 className="black_btn"
               >
