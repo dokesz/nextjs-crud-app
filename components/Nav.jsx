@@ -9,18 +9,18 @@ const Nav = () => {
   const { data: session } = useSession();
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
-  const providers = useMemo(() => {
+  const { providers, loading } = useMemo(() => {
     if (typeof window !== "undefined") {
       const cachedProviders = JSON.parse(localStorage.getItem("provider"));
       if (cachedProviders) {
-        return cachedProviders;
+        return { providers: cachedProviders, loading: false };
       }
     }
-    return null;
+    return { providers: null, loading: true };
   }, []);
 
   useEffect(() => {
-    if (!providers) {
+    if (loading) {
       getProviders().then((res) => {
         localStorage.setItem("provider", JSON.stringify(res));
       });
@@ -64,7 +64,7 @@ const Nav = () => {
           </div>
         ) : (
           <>
-            {providers && (
+            {providers && !loading && (
               <button
                 type="button"
                 onClick={() => {
@@ -123,7 +123,7 @@ const Nav = () => {
           </div>
         ) : (
           <>
-            {providers && (
+            {providers && !loading && (
               <button
                 type="button"
                 onClick={() => {
