@@ -7,12 +7,11 @@ import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Nav = () => {
   const { data: session } = useSession();
-
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
   const providers = useMemo(() => {
-    if (typeof window !== 'undefined') {
-      const cachedProviders = JSON.parse(localStorage.getItem('provider'));
+    if (typeof window !== "undefined") {
+      const cachedProviders = JSON.parse(localStorage.getItem("provider"));
       if (cachedProviders) {
         return cachedProviders;
       }
@@ -21,7 +20,7 @@ const Nav = () => {
   }, []);
 
   useEffect(() => {
-    if(!providers) {
+    if (!providers) {
       getProviders().then((res) => {
         localStorage.setItem("provider", JSON.stringify(res));
       });
@@ -65,11 +64,11 @@ const Nav = () => {
           </div>
         ) : (
           <>
-            {providers?.google && (
+            {providers && (
               <button
                 type="button"
                 onClick={() => {
-                  signIn(providers?.google);
+                  signIn(providers?.google.id);
                 }}
                 className="black_btn"
               >
@@ -124,11 +123,11 @@ const Nav = () => {
           </div>
         ) : (
           <>
-            {providers?.google && (
+            {providers && (
               <button
                 type="button"
                 onClick={() => {
-                  signIn(providers?.google);
+                  signIn(providers?.google.id);
                 }}
                 className="black_btn"
               >
