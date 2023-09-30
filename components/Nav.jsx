@@ -2,30 +2,34 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Nav = () => {
   const { data: session } = useSession();
   const [toggleDropdown, setToggleDropdown] = useState(false);
+  const [providers, setProviders] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const { providers, loading } = useMemo(() => {
+  useEffect(() => {
     if (typeof window !== "undefined") {
       const cachedProviders = JSON.parse(localStorage.getItem("provider"));
       if (cachedProviders) {
-        return { providers: cachedProviders, loading: false };
+        setProviders(cachedProviders);
+        setLoading(false);
       }
     }
-    return { providers: null, loading: true };
   }, []);
 
   useEffect(() => {
     if (loading) {
       getProviders().then((res) => {
         localStorage.setItem("provider", JSON.stringify(res));
+        setProviders(res);
+        setLoading(false);
       });
     }
-  }, []);
+  }, [loading]);
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">

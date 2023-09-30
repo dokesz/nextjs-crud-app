@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import dynamic from "next/dynamic";
 import Provider from "@components/Provider";
+import Nav from "@components/Nav";
 
 export const metadata = {
   title: "Prompts",
@@ -8,7 +9,7 @@ export const metadata = {
 };
 
 //noSSR nav
-const NoSSRNav = dynamic(()=> import('@components/Nav') , {ssr: false})
+// const NoSSRNav = dynamic(()=> import('@components/Nav') , {ssr: false})
 
 const RootLayout = ({ children }) => {
   return (
@@ -20,7 +21,8 @@ const RootLayout = ({ children }) => {
           </div>
 
           <main className="app">
-            <NoSSRNav />
+            {/* <NoSSRNav /> */}
+            <Nav />
             {children}
           </main>
         </Provider>
