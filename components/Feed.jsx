@@ -36,25 +36,25 @@ const Feed = () => {
   //it will filter the posts by that tag
   const handleTagClick = (tag) => {
     setSearchText(tag);
-  }
+  };
 
   useEffect(() => {
     const fetchPosts = async () => {
-        if (isLoading) {
-            try {
-                const response = await fetch("/api/prompt");
-                const data = await response.json();
-                setPosts(data);
-                setIsLoading(false);
-            } catch (error) {
-                console.error("Failed to fetch posts:", error);
-                setIsLoading(false);
-            }
+      if (isLoading) {
+        try {
+          const response = await fetch("/api/prompt");
+          const data = await response.json();
+          setPosts(data);
+        } catch (error) {
+          console.error("Failed to fetch posts:", error);
+        } finally {
+          setIsLoading(false);
         }
+      }
     };
 
     fetchPosts();
-}, [isLoading]);
+  }, [isLoading]);
 
   useEffect(() => {
     const filterPosts = posts.filter((post) => {
@@ -79,14 +79,14 @@ const Feed = () => {
           className="search_input peer"
         />
       </form>
-      {
-        isLoading ? (<div>Loading</div>) : ( 
-          <PromptCardList
-            data={!searchText ? posts : filteredPosts}
-            handleTagClick={handleTagClick}
-          />
-        )
-      }
+      {isLoading ? (
+        <div>Loading</div>
+      ) : (
+        <PromptCardList
+          data={!searchText ? posts : filteredPosts}
+          handleTagClick={handleTagClick}
+        />
+      )}
     </section>
   );
 };
