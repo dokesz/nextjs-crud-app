@@ -10,8 +10,6 @@ export const GET = async () => {
       await connectToDatabase();
       const prompts = await Prompt.find({})
         .populate("creator", "-email")
-        .select("-email")
-        .lean();
       return new Response(JSON.stringify(prompts), { status: 200 });
     } catch (error) {
       console.error("Failed to fetch all prompts:", error);
