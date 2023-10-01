@@ -43,6 +43,13 @@ const Feed = () => {
       if (isLoading) {
         try {
           const response = await fetch("/api/prompt");
+          if (!response.ok) {
+            console.error(`Fetch error: ${response.status} - ${response.statusText}`);
+            // Optionally, log the response body for more details
+            const responseBody = await response.text();
+            console.error(`Response body: ${responseBody}`);
+            throw new Error("Failed to fetch data");
+          }
           const data = await response.json();
           setPosts(data);
         } catch (error) {
