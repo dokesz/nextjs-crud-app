@@ -58,7 +58,9 @@ const PropmtCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
         </div>
       </div>
       {post?.image && (
-        <Image src={post?.image} width={120} height={120} style={{ width: "auto"}} alt="post image" />
+        <div className="text-center mt-2">
+          <Image src={post?.image} width={120} height={120} style={{ width: "auto"}} alt="post image" className="mx-auto mt-2"/>
+        </div>
       )}
       <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
       <p
