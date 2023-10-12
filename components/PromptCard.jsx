@@ -62,12 +62,12 @@ const PropmtCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
           <Image src={post?.image} width={120} height={120} style={{ width: "auto"}} alt="post image" className="mx-auto mt-2"/>
         </div>
       )}
-      <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
+      <p className="my-4 font-satoshi text-sm text-gray-700">{post?.prompt}</p>
       <p
         className="font-inter text-sm blue_gradient cursor-pointer"
-        onClick={() => handleTagClick?.(post.tag)}
+        onClick={() => handleTagClick?.(post?.tag)}
       >
-        #{post.tag}
+        #{post?.tag}
       </p>
 
       {session?.user?.id === post?.creator?._id && pathName === "/profile" && (
