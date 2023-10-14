@@ -4,10 +4,10 @@ import Provider from "@components/Provider";
 import Nav from "@components/Nav";
 import { useSession } from "next-auth/react";
 
-export const metadata = {
-  title: "Prompts",
-  description: "Discover & Shae AI Prompts",
-};
+// export const metadata = {
+//   title: "Prompts",
+//   description: "Discover & Shae AI Prompts",
+// };
 
 const SessionCheck = () => {
   const { data: session } = useSession();
