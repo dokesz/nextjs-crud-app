@@ -1,7 +1,6 @@
 import "../styles/globals.css";
 import Provider from "@components/Provider";
 import Nav from "@components/Nav";
-import { useSession } from "next-auth/react";
 import SessionCheck from "@components/NoteMessage";
 
 export const metadata = {
