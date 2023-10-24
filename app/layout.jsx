@@ -1,27 +1,12 @@
-"use client";
 import "../styles/globals.css";
 import Provider from "@components/Provider";
 import Nav from "@components/Nav";
 import { useSession } from "next-auth/react";
+import SessionCheck from "@components/NoteMessage";
 
-// export const metadata = {
-//   title: "Prompts",
-//   description: "Discover & Shae AI Prompts",
-// };
-
-const SessionCheck = () => {
-  const { data: session } = useSession();
-
-  if (!session) {
-    return (
-      <p className="text-red-800 italic">
-        Note: If you sign-in, the app will store your email, name and profile
-        picture
-      </p>
-    );
-  }
-
-  return null;
+export const metadata = {
+  title: "Prompts",
+  description: "Discover & Shae AI Prompts",
 };
 
 const RootLayout = ({ children }) => {
