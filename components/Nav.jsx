@@ -9,8 +9,8 @@ const Nav = () => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
   return (
-    <nav className="flex-between w-full mb-16 pt-3">
-      <Link href="/" className="flex gap-2 flex-center">
+    <nav className="flex justify-between w-full mb-16 pt-3">
+      <Link href="/" className="flex gap-2 items-center">
         <Image
           src="/assets/images/logo.svg"
           alt="logo"
@@ -21,8 +21,9 @@ const Nav = () => {
         <p className="logo_text">Prompt</p>
       </Link>
 
-      <div className="md:flex hidden">
-        {status === "authenticated" && (
+      {/* Desktop Navigation */}
+      <div className="hidden md:flex">
+        {status === "authenticated" ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
               Create Post
@@ -40,14 +41,12 @@ const Nav = () => {
               />
             </Link>
           </div>
-        )}
-        {status === "unauthenticated" && (
+        ) : (
           <button
             type="button"
-            onClick={() => {
-              signIn("google");
-            }}
-            className="black_btn"
+            onClick={() => signIn("google")}
+            className={`btn-black ${status === "loading" ? "opacity-50 cursor-not-allowed black_btn" : "black_btn"}`}
+            disabled={status === "loading"}
           >
             Sign in with Google
           </button>
@@ -55,8 +54,8 @@ const Nav = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="md:hidden flex relative">
-        {status === "authenticated" && (
+      <div className="flex md:hidden relative">
+        {status === "authenticated" ? (
           <div className="flex">
             <Image
               src={session?.user.image}
@@ -95,14 +94,12 @@ const Nav = () => {
               </div>
             )}
           </div>
-        )}
-        {status === "unauthenticated" && (
+        ) : (
           <button
             type="button"
-            onClick={() => {
-              signIn("google");
-            }}
-            className="black_btn"
+            onClick={() => signIn("google")}
+            className={`btn-black ${status === "loading" ? "opacity-50 cursor-not-allowed black_btn" : "black_btn"}`}
+            disabled={status === "loading"}
           >
             Sign in with Google
           </button>
